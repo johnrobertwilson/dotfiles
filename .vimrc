@@ -12,8 +12,8 @@ filetype on
 
 " Autoload with Pathogen.
 filetype off
-call pathogen#helptags()
-call pathogen#runtime_append_all_bundles()
+"call pathogen#helptags()
+"call pathogen#runtime_append_all_bundles()
 filetype plugin indent on
 
 " Fix UTF-8 issues on Linuxes.
@@ -23,10 +23,10 @@ if !has("gui_running")
   " Oh, OS X.
   set t_Co=256
   "colorscheme mustang
-  colorscheme Tomorrow-Night-Bright
+ " colorscheme Tomorrow-Night-Bright
 else
   " Set color scheme
-  colorscheme Tomorrow-Night-Bright
+ " colorscheme Tomorrow-Night-Bright
 endif
 
 " Keep swp files under ~/.vim/swap

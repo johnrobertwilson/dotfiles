@@ -9,7 +9,8 @@
 shopt -s checkwinsize
 
 # Terminal.app sucks.
-[[ "$TERM_PROGRAM" == "Apple_Terminal" ]] && return
+# Why?
+# [[ "$TERM_PROGRAM" == "Apple_Terminal" ]] && return
 
 # Force `ls` and `grep` to be colorful under screen/tmux.
 [[ "$TERM" == "screen-256color" ]] && {
@@ -46,7 +47,7 @@ bash_prompt() {
 
   # space goes inside the printf so its not there when there's no git branch
   PS1=" ${EMK}┌┤${UC}\u${EMK}@${UC}\h${RET_VALUE} ${EMG}[\D{%b %d %H:%M:%S}] ${EMB}\w${EMM}${VC_INFO}${EMW}\n ${EMK}└╼${NONE} "
-  PS4='+$BASH_SOURCE:$LINENO:$FUNCNAME: '
+  PS4=" +$BASH_SOURCE:$LINENO:$FUNCNAME: "
 }
 
 # show return val of last command

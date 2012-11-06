@@ -81,8 +81,13 @@ set winheight=10
 au BufWinEnter * exe "normal! \<c-w>="
 
 " Do not check puppet syntax, since Ruby is le slow.
-let g:syntastic_disabled_filetypes = ['puppet', 'scss']
+let g:syntastic_disabled_filetypes = ['puppet', 'scss', 'scala']
 let g:syntastic_phpcs_conf=" --standard=Drupal --extensions=php,module,inc,install,test,profile,theme"
+
+" Map v keys for vimux.
+map <Leader>vp :VimuxPromptCommand<CR>
+map <Leader>vv :VimuxRunLastCommand<CR>
+map <Leader>vq :VimuxCloseRunner<CR>
 
 " Tame searching and moving, a la Steve Losh.
 nnoremap / /\v
@@ -198,10 +203,20 @@ nnoremap <leader>, :CtrlP<Enter>
 nnoremap <leader>. :CtrlPBuffer<Enter>
 
 " Don't search VCS directories, CtrlP.
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*.so
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*.so,*.class,*.jar
 
 " Don't have CtrlP manage the working directory.
 let g:ctrlp_working_path_mode = 0
+
+" Editing a LISP with vim? Heresy!
+if has("mac")
+  let vimclojure#NailgunClient = "/Users/smerrill/bin/ng"
+elseif has("unix")
+  let vimclojure#NailgunClient = "/home/smerrill/bin/linux/ng"
+endif
+let g:vimclojure#HighlightBuiltins = 1
+let g:vimclojure#ParenRainbow = 1
+let vimclojure#WantNailgun = 1
 
 " The default .vimrc follows.
 

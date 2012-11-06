@@ -12,6 +12,11 @@ Darwin)
     . $brew_prefix/etc/bash_completion
   fi
 
+  # Support for rbenv
+  if [ -f $brew_prefix/bin/rbenv ]; then
+    eval "$(rbenv init -)"
+  fi
+
   # Put homebrew PHP ahead in $PATH a la http://justinhileman.info/article/reinstalling-php-53-on-mac-os-x/
   export PATH=$brew_prefix/sbin:$brew_prefix/bin:$PATH
 
@@ -37,7 +42,7 @@ Darwin)
     export EC2_HOME="/usr/local/Cellar/ec2-api-tools/1.3-62308/jars"
   }
 
-  export PYTHONPATH=$brew_prefix/lib/python2.7/site-packages
+  export PYTHONPATH=$brew_prefix/lib/python2.7/site-packages:$PYTHONPATH
 
   # NPM
   [[ -d $brew_prefix/lib/node_modules ]] && export NODE_PATH=$brew_prefix/lib/node_modules
@@ -47,6 +52,9 @@ Linux)
   if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
   fi
+
+  # Support for rbenv
+  type -p rbenv > /dev/null && eval "$(rbenv init -)"
 
   # Muscle memory is a powerful thing.
   type -P gvim > /dev/null && {
@@ -77,13 +85,16 @@ alias php-ctags='ctags --langmap=php:.engine.inc.module.theme.php.install.test.p
 # If PEAR is installed, put its bin dir ahead of $PATH.
 type -P pear > /dev/null && export PATH=$(pear config-get bin_dir):$PATH
 
-# Always set up $HOME/bin in the front of $PATH.
-export PATH=$HOME/bin:$PATH
+# Always set up $HOME/bin in $PATH.
+export PATH=$PATH:$HOME/bin
 
 # Wrap 'git' in 'hub' if it is available.
 type -P hub > /dev/null && {
   alias git=hub
 }
+
+# Use keychain if it's available.
+type -P keychain > /dev/null && eval `keychain --eval --agents ssh id_rsa id_dsa`
 
 # Load other files for bash's use, including some that may not be in git.
 [[ -d ~/.profile.d ]] && for i in ~/.profile.d/*; do
@@ -92,9 +103,6 @@ done
 
 # Load up tmuxinator if it's available.
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
-
-# This loads RVM into a shell session.
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
 # CLJR for Clojure.
 [[ -d $HOME/.cljr/bin ]] && export PATH=$HOME/.cljr/bin:$PATH

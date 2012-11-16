@@ -59,3 +59,5 @@ PROMPT_COMMAND='RET=$?'
 bash_prompt
 unset bash_prompt
 
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

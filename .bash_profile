@@ -25,12 +25,12 @@ Darwin)
 
   # Use vim as editor for commits, etc. Recognize if the MacVim app
   # is in ~/Applications, as `brew linkapps` will do.
-  EDITOR="/Applications/MacVim.app/Contents/MacOS/Vim"
-  [[ -d $HOME/Applications/MacVim.app ]] && EDITOR="${HOME}${EDITOR}"
+  # EDITOR="/Applications/MacVim.app/Contents/MacOS/Vim"
+  # [[ -d $HOME/Applications/MacVim.app ]] && EDITOR="${HOME}${EDITOR}"
 
-  export EDITOR="${EDITOR}"
-  alias vim=$EDITOR
-  alias gvim=mvim
+  # export EDITOR="${EDITOR}"
+  # alias vim=$EDITOR
+  # alias gvim=mvim
 
   # EC2 Tools.
   export JAVA_HOME="/System/Library/Frameworks/JavaVM.framework/Home"
@@ -110,3 +110,5 @@ done
 # If we are in an interactive session, source bashrc.
 [[ -n $PS1 && -f ~/.bashrc ]] && . ~/.bashrc
 
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
